@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCCWC — The Center for Childhood and Child Welfare in Context</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#0d6e5e; --teal-deep:#0a5448; --teal-soft:#e6f1ee;
+    --charcoal:#1f2937; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+    --bg:#f7f6f2; --card:#ffffff;
+    --coral:#f4a98a; --coral-soft:#fcebe1;
+    --gold:#e9c662; --gold-soft:#faecbe;
+    --shadow-sm:0 1px 2px rgba(17,24,39,.04), 0 1px 3px rgba(17,24,39,.06);
+    --shadow-md:0 4px 6px rgba(17,24,39,.04), 0 10px 25px rgba(17,24,39,.06);
+    --shadow-lg:0 20px 40px rgba(17,24,39,.08), 0 8px 16px rgba(17,24,39,.04);
+    --radius:14px; --radius-lg:22px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:'Fraunces',Georgia,serif;letter-spacing:-0.02em;line-height:1.15;color:var(--ink)}
+  a{color:inherit}
+  img{display:block;max-width:100%}
+
+  .topbar{background:rgba(255,255,255,.86);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(8px)}
+  .topbar-inner{max-width:1240px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+  .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .brand-mark{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#e35d5d,#e89e3a 25%,#3aa765 50%,#d65aa1 75%,#3a89d1);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Fraunces',serif;font-weight:700;font-size:14px;box-shadow:var(--shadow-sm)}
+  .brand-text{display:flex;flex-direction:column;line-height:1.1}
+  .brand-text strong{font-family:'Fraunces',serif;font-size:18px;color:var(--ink);font-weight:700}
+  .brand-text span{font-size:12px;color:var(--muted)}
+  nav.primary{display:flex;gap:4px;align-items:center}
+  nav.primary a{padding:8px 14px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500;color:var(--charcoal);transition:background .15s,color .15s}
+  nav.primary a:hover{background:var(--teal-soft);color:var(--teal-deep)}
+  .edit-toggle{background:var(--ink);color:#fff;border:none;padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s,background .15s}
+  .edit-toggle:hover{background:var(--teal-deep);transform:translateY(-1px)}
+  .edit-toggle.active{background:var(--coral);color:var(--ink)}
+
+  /* Universities strip */
+  .unis{background:#eef3f1;border-bottom:1px solid #d4e6e1;padding:24px 28px}
+  .unis-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:60px;flex-wrap:wrap}
+  .uni-logo{height:64px;display:flex;align-items:center;justify-content:center;cursor:default;position:relative}
+  .uni-logo img{max-height:100%;max-width:240px;width:auto;object-fit:contain}
+  .uni-logo .placeholder-logo{height:64px;min-width:160px;padding:0 22px;background:#fff;border:2px dashed #b9cdc7;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#6b8b82;font-size:11px;font-weight:600;text-align:center;line-height:1.3;letter-spacing:.03em}
+  .uni-logo .placeholder-logo strong{font-family:'Fraunces',serif;font-size:14px;color:var(--teal-deep);margin-bottom:2px;letter-spacing:0}
+
+  /* Hero */
+  .hero{position:relative;padding:80px 28px 90px;overflow:hidden;background:radial-gradient(1200px 600px at 85% -10%,rgba(244,169,138,.25),transparent 60%),radial-gradient(800px 400px at 10% 110%,rgba(13,110,94,.10),transparent 60%),var(--bg)}
+  .hero-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:12px;font-weight:600;color:var(--teal-deep);letter-spacing:.04em;text-transform:uppercase;box-shadow:var(--shadow-sm)}
+  .hero-eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  .hero h1{margin-top:18px;font-size:clamp(38px,5.5vw,68px);font-weight:600;letter-spacing:-0.035em}
+  .hero h1 .colored{background:linear-gradient(110deg,#e35d5d 0%,#e89e3a 22%,#3aa765 45%,#d65aa1 70%,#3a89d1 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic;font-family:'Fraunces',serif}
+  .hero p.lead{margin-top:22px;font-size:18px;color:var(--charcoal);max-width:560px;line-height:1.6}
+  .hero-cta{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:10px;font-weight:600;font-size:14px;text-decoration:none;transition:transform .15s,box-shadow .15s,background .15s;border:none;cursor:pointer}
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);background:var(--teal-deep)}
+  .btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .btn-ghost:hover{background:#fff;border-color:var(--ink)}
+
+  .hero-image-wrap{position:relative;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-lg);background:#fff;border:1px solid var(--line);aspect-ratio:5/4}
+  .hero-image-wrap img{width:100%;height:100%;object-fit:cover}
+  .hero-image-wrap .image-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;background:radial-gradient(circle at 30% 20%,rgba(227,93,93,.12),transparent 50%),radial-gradient(circle at 80% 70%,rgba(58,167,101,.12),transparent 50%),linear-gradient(135deg,#f9f7f3,#fff);text-align:center;padding:40px}
+  .placeholder-icon{width:84px;height:84px;border-radius:20px;background:linear-gradient(135deg,#e35d5d,#e89e3a 25%,#3aa765 50%,#d65aa1 75%,#3a89d1);display:flex;align-items:center;justify-content:center;color:#fff;font-size:36px;box-shadow:var(--shadow-md)}
+  .placeholder-icon::before{content:"🖼"}
+  .placeholder-text strong{display:block;font-family:'Fraunces',serif;font-size:20px;color:var(--ink);margin-bottom:6px}
+  .placeholder-text span{font-size:13px;color:var(--muted);max-width:280px;display:block;line-height:1.5}
+
+  section.block{padding:90px 28px;position:relative}
+  .container{max-width:1240px;margin:0 auto}
+  .section-eyebrow{color:var(--teal);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .section-eyebrow::before{content:"";width:24px;height:2px;background:var(--teal);border-radius:2px}
+  .section-title{font-size:clamp(32px,4vw,48px);font-weight:600;max-width:780px}
+  .section-title em{font-style:italic;color:var(--teal-deep);font-weight:500}
+  .section-intro{font-size:17px;color:var(--charcoal);margin-top:18px;max-width:780px;line-height:1.7}
+
+  /* About */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:48px;align-items:start}
+  .about-text p{margin-top:18px;color:var(--charcoal);font-size:16px;line-height:1.75}
+  .about-text p:first-child{margin-top:0}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .stat-card{background:var(--card);border:1px solid var(--line);padding:24px;border-radius:var(--radius);box-shadow:var(--shadow-sm);transition:transform .2s,box-shadow .2s}
+  .stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+  .stat-card.accent-teal{background:linear-gradient(135deg,var(--teal),var(--teal-deep));color:#fff;border-color:var(--teal-deep)}
+  .stat-card.accent-coral{background:var(--coral-soft);border-color:#f5d6c5}
+  .stat-card.accent-gold{background:var(--gold-soft);border-color:#ecd887}
+  .stat-num{font-family:'Fraunces',serif;font-size:38px;font-weight:600;line-height:1;letter-spacing:-0.02em}
+  .stat-label{margin-top:10px;font-size:13px;font-weight:500;opacity:.8;line-height:1.4}
+  .accent-teal .stat-label{opacity:.9}
+
+  /* Field */
+  .field-section{background:linear-gradient(180deg,transparent,#fff 30%,#fff 70%,transparent)}
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
+  .field-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
+  .field-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .field-thumb{height:200px;display:flex;align-items:center;padding:28px;position:relative;overflow:hidden}
+  .field-thumb-1{background:linear-gradient(135deg,#f1845c,#ec6a3b)}
+  .field-thumb-2{background:linear-gradient(135deg,#1e2c5a,#0e1838)}
+  .field-thumb h4{color:#fff;font-size:24px;font-weight:600;line-height:1.2;max-width:300px;z-index:2;position:relative}
+  .field-thumb p{color:rgba(255,255,255,.85);margin-top:8px;font-size:14px;font-family:'Inter',sans-serif;z-index:2;position:relative}
+  .thumb-deco{position:absolute;right:18px;top:50%;transform:translateY(-50%);width:120px;height:120px;opacity:.55}
+  .field-meta{padding:22px 26px 26px;border-top:1px solid var(--line);background:#fff}
+  .field-tag{display:inline-block;background:var(--teal-soft);color:var(--teal-deep);padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .field-title{margin-top:10px;font-size:17px;font-weight:600;color:var(--ink);line-height:1.4}
+  .field-date{margin-top:8px;font-size:13px;color:var(--muted)}
+
+  /* Objectives */
+  .obj-section{background:var(--bg)}
+  .obj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .obj-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:34px 30px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+  .obj-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+  .obj-icon{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:22px;font-size:24px}
+  .obj-icon.teal{background:var(--teal-soft);color:var(--teal-deep)}
+  .obj-icon.coral{background:var(--coral-soft);color:#c45a32}
+  .obj-icon.gold{background:var(--gold-soft);color:#9b7d1c}
+  .obj-card h3{font-size:22px;font-weight:600;margin-bottom:14px}
+  .obj-card ul{list-style:none;padding:0;margin:0}
+  .obj-card li{padding:10px 0 10px 24px;position:relative;font-size:14.5px;color:var(--charcoal);line-height:1.55;border-bottom:1px solid #f0f0ec}
+  .obj-card li:last-child{border-bottom:none}
+  .obj-card li::before{content:"";position:absolute;left:0;top:18px;width:8px;height:8px;border-radius:2px;background:var(--teal);transform:rotate(45deg)}
+  .obj-card.coral-card li::before{background:var(--coral)}
+  .obj-card.gold-card li::before{background:var(--gold)}
+
+  /* Teams */
+  .teams-section{background:#fff}
+  .teams-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:48px}
+  .team-card{border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;background:#fff;transition:border-color .2s,transform .2s;display:flex;gap:18px;align-items:flex-start}
+  .team-card:hover{border-color:var(--teal);transform:translateY(-2px)}
+  .team-tag{flex-shrink:0;width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:22px;color:#fff}
+  .team-1{background:linear-gradient(135deg,#e35d5d,#c84545)}
+  .team-2{background:linear-gradient(135deg,#e89e3a,#cf7e1c)}
+  .team-3{background:linear-gradient(135deg,#3aa765,#268a4d)}
+  .team-4{background:linear-gradient(135deg,#d65aa1,#b8418a)}
+  .team-5{background:linear-gradient(135deg,#3a89d1,#1e6db4)}
+  .team-content h4{font-size:17px;font-weight:600;color:var(--ink);line-height:1.3}
+  .team-content p{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.5}
+
+  /* Members */
+  .members-section{background:var(--bg)}
+  .members-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:48px}
+  .member-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column}
+  .member-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+  .member-photo{width:100%;aspect-ratio:4/3;background:#eef3f1;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;cursor:pointer}
+  .member-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .member-photo .photo-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#eef3f1,#dde8e3);color:var(--teal-deep)}
+  .member-photo .photo-placeholder .init{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:24px;color:#fff;box-shadow:var(--shadow-sm)}
+  .member-photo .photo-placeholder .label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;opacity:.7}
+  .init.c1{background:linear-gradient(135deg,#e35d5d,#c84545)}
+  .init.c2{background:linear-gradient(135deg,#e89e3a,#cf7e1c)}
+  .init.c3{background:linear-gradient(135deg,#3aa765,#268a4d)}
+  .init.c4{background:linear-gradient(135deg,#d65aa1,#b8418a)}
+  .init.c5{background:linear-gradient(135deg,#3a89d1,#1e6db4)}
+  .init.c6{background:linear-gradient(135deg,#7a5fc7,#5a3fa5)}
+
+  .member-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex-grow:1}
+  .member-name{font-size:17px;font-weight:600;color:var(--ink);line-height:1.25;font-family:'Fraunces',serif}
+  .member-role{font-size:12px;color:var(--teal-deep);font-weight:600;margin-top:5px;letter-spacing:.02em}
+  .member-bio{font-size:13.5px;color:var(--charcoal);line-height:1.6;flex-grow:1;margin-top:14px}
+  .member-foot{margin-top:18px;padding-top:16px;border-top:1px solid #f0f0ec;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .member-email{color:var(--teal-deep);font-size:13px;font-weight:500;text-decoration:none;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+  .member-email:hover{text-decoration:underline}
+  body.edit-mode .member-email{cursor:text}
+  .email-edit-modal{display:none;position:fixed;inset:0;background:rgba(17,24,39,.5);z-index:200;align-items:center;justify-content:center;padding:20px}
+  .email-edit-modal.show{display:flex}
+  .email-edit-card{background:#fff;border-radius:14px;padding:28px;max-width:420px;width:100%;box-shadow:var(--shadow-lg)}
+  .email-edit-card h3{font-size:18px;margin-bottom:6px}
+  .email-edit-card p{font-size:13px;color:var(--muted);margin-bottom:16px}
+  .email-edit-card input{width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;outline:none}
+  .email-edit-card input:focus{border-color:var(--teal)}
+  .email-edit-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+  .email-edit-actions button{padding:9px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none}
+  .email-edit-actions .save-btn{background:var(--teal);color:#fff}
+  .email-edit-actions .save-btn:hover{background:var(--teal-deep)}
+  .email-edit-actions .cancel-btn{background:transparent;border:1px solid var(--line);color:var(--charcoal)}
+  .email-edit-actions .cancel-btn:hover{background:var(--bg)}
+  .member-affil{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;font-weight:600;text-align:right}
+
+  /* Edit overlays */
+  body.edit-mode .member-photo,
+  body.edit-mode .hero-image-wrap{cursor:pointer}
+  body.edit-mode .member-photo::after,
+  body.edit-mode .hero-image-wrap::after{content:"📷 Click to replace photo";position:absolute;inset:0;background:rgba(13,110,94,.85);color:#fff;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;font-size:14px;font-weight:600;z-index:5;pointer-events:none}
+  body.edit-mode .member-photo:hover::after,
+  body.edit-mode .hero-image-wrap:hover::after{opacity:1}
+  body.edit-mode .uni-logo{cursor:pointer}
+  body.edit-mode .uni-logo::after{content:"📷";position:absolute;top:-8px;right:-8px;width:24px;height:24px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:var(--shadow-sm)}
+
+  /* Footer */
+  footer{background:var(--ink);color:#cbd5e1;padding:60px 28px 40px}
+  .footer-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px;align-items:start}
+  footer h4{color:#fff;font-family:'Fraunces',serif;font-size:18px;margin-bottom:16px;font-weight:600}
+  footer p{font-size:14px;line-height:1.7;color:#94a3b8}
+  footer a{color:#cbd5e1;text-decoration:none;font-size:14px;display:block;padding:4px 0}
+  footer a:hover{color:#fff}
+  .footer-bottom{max-width:1240px;margin:50px auto 0;padding-top:24px;border-top:1px solid #374151;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:13px;color:#94a3b8}
+
+  /* Edit mode styles */
+  body.edit-mode [contenteditable="true"]{outline:2px dashed var(--coral);outline-offset:3px;background:rgba(244,169,138,.06);border-radius:4px}
+  body.edit-mode [contenteditable="true"]:focus{outline:2px solid var(--teal);background:rgba(13,110,94,.04)}
+  body.edit-mode [contenteditable="true"]:hover{outline-color:var(--teal)}
+
+  .edit-banner{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:14px 20px;border-radius:14px;box-shadow:var(--shadow-lg);display:none;align-items:center;gap:14px;z-index:100;font-size:14px;flex-wrap:wrap;justify-content:center;max-width:calc(100vw - 40px)}
+  body.edit-mode .edit-banner{display:flex}
+  .edit-banner button{background:var(--teal);color:#fff;border:none;padding:8px 16px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer}
+  .edit-banner button:hover{background:var(--teal-deep)}
+  .edit-banner button.danger{background:transparent;border:1px solid #4b5563}
+  .edit-banner button.danger:hover{background:#374151}
+
+  .add-member-btn,.add-team-btn,.add-obj-btn{display:none;width:100%;background:#fff;border:2px dashed var(--coral);color:var(--coral);padding:24px;border-radius:var(--radius);cursor:pointer;font-size:14px;font-weight:600;transition:background .15s,color .15s,border-color .15s;grid-column:1/-1}
+  .add-member-btn:hover,.add-team-btn:hover,.add-obj-btn:hover{background:var(--coral-soft);color:#c45a32;border-color:#c45a32}
+  body.edit-mode .add-member-btn,body.edit-mode .add-team-btn,body.edit-mode .add-obj-btn{display:block}
+
+  .delete-btn{display:none;position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:#fff;border:1px solid var(--line);color:#dc2626;font-size:14px;cursor:pointer;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);z-index:10}
+  .delete-btn:hover{background:#dc2626;color:#fff;border-color:#dc2626}
+  body.edit-mode .has-delete{position:relative}
+  body.edit-mode .has-delete .delete-btn{display:flex}
+
+  .help-tooltip{display:none;position:fixed;top:84px;right:28px;z-index:60;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lg);padding:18px 22px;max-width:320px;font-size:13px;line-height:1.6;color:var(--charcoal)}
+  body.edit-mode .help-tooltip{display:block}
+  .help-tooltip strong{display:block;margin-bottom:8px;color:var(--teal-deep);font-size:14px}
+  .help-tooltip ul{margin:8px 0 0;padding-left:18px}
+  .help-tooltip li{margin-bottom:4px}
+  .help-tooltip .close-help{position:absolute;top:6px;right:8px;background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;line-height:1}
+  .help-tooltip.dismissed{display:none !important}
+  .file-input-hidden{display:none}
+
+  @media (max-width:980px){
+    .hero-inner,.about-grid{grid-template-columns:1fr;gap:40px}
+    .field-grid,.obj-grid,.teams-grid{grid-template-columns:1fr}
+    .members-grid{grid-template-columns:repeat(2,1fr)}
+    nav.primary{display:none}
+    .footer-inner{grid-template-columns:1fr}
+    .about-stats{grid-template-columns:1fr 1fr}
+    section.block{padding:64px 24px}
+    .hero{padding:60px 24px 70px}
+    .unis-inner{gap:32px}
+    .help-tooltip{max-width:calc(100vw - 56px);right:14px;left:14px}
+  }
+  @media (max-width:560px){
+    .members-grid{grid-template-columns:1fr}
+    .about-stats{grid-template-columns:1fr}
+    .topbar-inner{padding:12px 18px}
+    .brand-text strong{font-size:15px}
+    .brand-text span{font-size:11px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#" class="brand">
+      <div class="brand-mark">CC</div>
+      <div class="brand-text">
+        <strong>CCCWC</strong>
+        <span>Childhood &amp; Child Welfare in Context</span>
+      </div>
+    </a>
+    <nav class="primary">
+      <a href="#about">About</a>
+      <a href="#field">Research</a>
+      <a href="#objectives">Objectives</a>
+      <a href="#teams">Teams</a>
+      <a href="#members">Members</a>
+    </nav>
+    <button class="edit-toggle" id="editToggle" onclick="toggleEdit()">
+      <span id="editIcon">✎</span> <span id="editLabel">Edit</span>
+    </button>
+  </div>
+</header>
+
+<div class="unis">
+  <div class="unis-inner">
+    <div class="uni-logo" data-img-id="logo-goethe" onclick="openImagePicker(event, this)">
+      <img id="logo-goethe-img" alt="Goethe University Frankfurt" style="display:none">
+      <div class="placeholder-logo" id="logo-goethe-placeholder">
+        <strong>GOETHE</strong>
+        UNIVERSITÄT<br>FRANKFURT AM MAIN
+      </div>
+    </div>
+    <div class="uni-logo" data-img-id="logo-baerwald" onclick="openImagePicker(event, this)">
+      <img id="logo-baerwald-img" alt="Paul Baerwald School of Social Work" style="display:none">
+      <div class="placeholder-logo" id="logo-baerwald-placeholder">
+        <strong>HUJI</strong>
+        Paul Baerwald<br>School of Social Work
+      </div>
+    </div>
+    <div class="uni-logo" data-img-id="logo-huji" onclick="openImagePicker(event, this)">
+      <img id="logo-huji-img" alt="Hebrew University of Jerusalem" style="display:none">
+      <div class="placeholder-logo" id="logo-huji-placeholder">
+        <strong>The Hebrew University</strong>
+        of Jerusalem
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">A German–Israeli Initiative</div>
+      <h1 contenteditable="false">
+        Critical childhood research,<br>
+        <span class="colored">in context.</span>
+      </h1>
+      <p class="lead" contenteditable="false">
+        The Center for Childhood and Child Welfare in Context (CCCWC) is a planned
+        German–Israeli initiative based in Frankfurt and Jerusalem, dedicated to
+        advancing critical childhood studies through collaborative research,
+        teaching, and early-career researcher development.
+      </p>
+      <div class="hero-cta">
+        <a href="#about" class="btn btn-primary">Explore the center →</a>
+        <a href="#members" class="btn btn-ghost">Meet the researchers</a>
+      </div>
+    </div>
+
+    <div class="hero-image-wrap" data-img-id="hero-cover" onclick="openImagePicker(event, this)">
+      <img id="hero-cover-img" alt="CCCWC cover" style="display:none">
+      <div class="image-placeholder" id="hero-cover-placeholder">
+        <div class="placeholder-icon"></div>
+        <div class="placeholder-text">
+          <strong>Cover image</strong>
+          <span>Click here in edit mode to upload the original CCCWC cover image with the colorful illustration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="about">
+  <div class="container">
+    <div class="section-eyebrow">About the Center</div>
+    <h2 class="section-title" contenteditable="false">
+      Engaging in Critical Childhood Studies — <em>a German–Israeli collaboration</em> from Frankfurt and Jerusalem.
+    </h2>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p contenteditable="false">
+          Childhood research at both universities stands at the forefront of international scholarship.
+          It is closely connected to pioneering work in the social sciences on childhood and the family.
+          At the core of the planned CCCWC are studies on children's well-being and rights, with a particular
+          interest in child welfare, vulnerability, violence, abuse, and neglect.
+        </p>
+        <p contenteditable="false">
+          Since 2015, international data sets on the subjective well-being of children aged eight to twelve
+          have been available through ISCIWeB. This study, founded and led by the research group leaders at
+          both universities, was made possible by a 1.5 million euro grant from the Jacobs Foundation in Zurich.
+          The data reveal both commonalities and significant differences in the experiences of childhood in
+          Israel and Germany.
+        </p>
+        <p contenteditable="false">
+          Since 2009, the leaders of the research teams have worked together intensively and have earned
+          international recognition in childhood studies. Their collaboration has focused especially on
+          child well-being, children's participation in research, and vulnerability — with a particular
+          emphasis on child sexual abuse.
+        </p>
+      </div>
+
+      <div class="about-stats">
+        <div class="stat-card accent-teal">
+          <div class="stat-num">€1.5M</div>
+          <div class="stat-label">Jacobs Foundation grant supporting ISCIWeB</div>
+        </div>
+        <div class="stat-card accent-coral">
+          <div class="stat-num">2015</div>
+          <div class="stat-label">International data sets on children's subjective well-being</div>
+        </div>
+        <div class="stat-card accent-gold">
+          <div class="stat-num">8–12</div>
+          <div class="stat-label">Age range studied across multiple countries</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" style="color:var(--teal-deep)">2009</div>
+          <div class="stat-label">Year the research collaboration began</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block field-section" id="field">
+  <div class="container">
+    <div class="section-eyebrow">Fresh from the field</div>
+    <h2 class="section-title" contenteditable="false">
+      Recent <em>publications &amp; research</em> from the network.
+    </h2>
+
+    <div class="field-grid" id="fieldGrid">
+      <article class="field-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="field-thumb field-thumb-1">
+          <div>
+            <h4 contenteditable="false">How children feel</h4>
+            <p contenteditable="false">Children's perceptions of mental health in 4 EU Member States</p>
+          </div>
+          <svg class="thumb-deco" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="30" cy="30" rx="22" ry="11" fill="#fff"/>
+            <ellipse cx="55" cy="20" rx="18" ry="9" fill="#fff"/>
+            <g transform="translate(60 55)">
+              <polygon points="0,-12 10,0 0,12 -10,0" fill="#fff"/>
+              <line x1="0" y1="12" x2="-10" y2="40" stroke="#fff" stroke-width="2"/>
+            </g>
+          </svg>
+        </div>
+        <div class="field-meta">
+          <span class="field-tag">Report</span>
+          <div class="field-title" contenteditable="false">Comparative findings across European member states</div>
+          <div class="field-date" contenteditable="false">4 June 2025</div>
+        </div>
+      </article>
+
+      <article class="field-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="field-thumb field-thumb-2">
+          <div>
+            <h4 contenteditable="false">Life Stressors, Social Support, and Children's Subjective Well-Being</h4>
+            <p contenteditable="false">Evidence from a Cross-National Survey of 20 Societies</p>
+          </div>
+          <svg class="thumb-deco" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="20" width="60" height="60" rx="6" fill="#fff" opacity=".15"/>
+            <rect x="28" y="32" width="44" height="3" fill="#fff" opacity=".5"/>
+            <rect x="28" y="42" width="36" height="3" fill="#fff" opacity=".5"/>
+            <rect x="28" y="52" width="40" height="3" fill="#fff" opacity=".5"/>
+            <rect x="28" y="62" width="30" height="3" fill="#fff" opacity=".5"/>
+          </svg>
+        </div>
+        <div class="field-meta">
+          <span class="field-tag">Journal article</span>
+          <div class="field-title" contenteditable="false">Child Indicators Research, Vol 18, pp. 905–936</div>
+          <div class="field-date" contenteditable="false">Published 11 January 2025 · Open Access</div>
+        </div>
+      </article>
+
+      <button class="add-member-btn" onclick="addFieldCard()">+ Add a publication</button>
+    </div>
+  </div>
+</section>
+
+<section class="block obj-section" id="objectives">
+  <div class="container">
+    <div class="section-eyebrow">Objectives</div>
+    <h2 class="section-title" contenteditable="false">
+      Three pillars: <em>research, qualification, and teaching.</em>
+    </h2>
+    <p class="section-intro" contenteditable="false">
+      The planned center will develop three key areas that form the foundation of its work in critical
+      childhood studies. Each will be expanded to contribute fresh and innovative perspectives to the
+      international academic community.
+    </p>
+
+    <div class="obj-grid" id="objGrid">
+      <article class="obj-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="obj-icon teal">◆</div>
+        <h3 contenteditable="false">Research Agenda</h3>
+        <ul>
+          <li contenteditable="false">Identifying and developing selected research foci, such as Digital Childhoods and Participation, and Emotional Violence from the Perspective of Children</li>
+          <li contenteditable="false">Expanding networks among childhood researchers in Frankfurt and Jerusalem</li>
+          <li contenteditable="false">Advancing the field of critical German–Israeli childhood research</li>
+          <li contenteditable="false">Strengthening connections with migration research</li>
+          <li contenteditable="false">Preparing research proposals for funding bodies including GIF, DFG, Minerva, and other foundations</li>
+          <li contenteditable="false">Contributing to global studies such as the Children's Worlds Study</li>
+        </ul>
+      </article>
+
+      <article class="obj-card coral-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="obj-icon coral">★</div>
+        <h3 contenteditable="false">Early-Career Development</h3>
+        <ul>
+          <li contenteditable="false">Supporting joint publications in international journals by PhD students and postdoctoral researchers from Frankfurt and Jerusalem</li>
+          <li contenteditable="false">Organizing annual workshops on innovative topics and methodological challenges in critical childhood research</li>
+          <li contenteditable="false">Facilitating research stays for early-career researchers at partner institutions</li>
+        </ul>
+      </article>
+
+      <article class="obj-card gold-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="obj-icon gold">▲</div>
+        <h3 contenteditable="false">Teaching &amp; Curriculum</h3>
+        <ul>
+          <li contenteditable="false">Developing courses and fostering Master's-level student networks focused on child maltreatment, well-being, migration, displacement, poverty, and vulnerability</li>
+          <li contenteditable="false">Organizing annual compact events and building on established seminar formats</li>
+          <li contenteditable="false">Designing and evaluating hybrid teaching approaches</li>
+          <li contenteditable="false">Promoting internationalization in Educational Science (Frankfurt) and Social Work (Jerusalem)</li>
+        </ul>
+      </article>
+
+      <button class="add-obj-btn" onclick="addObjective()">+ Add an objective area</button>
+    </div>
+  </div>
+</section>
+
+<section class="block teams-section" id="teams">
+  <div class="container">
+    <div class="section-eyebrow">Research focus areas</div>
+    <h2 class="section-title" contenteditable="false">
+      <em>Five collaborative teams</em> across critical childhood studies.
+    </h2>
+    <p class="section-intro" contenteditable="false">
+      Work is organized into focused teams, each addressing a distinct thematic area within critical childhood studies.
+    </p>
+
+    <div class="teams-grid" id="teamsGrid">
+      <article class="team-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="team-tag team-1">EA</div>
+        <div class="team-content">
+          <h4 contenteditable="false">Emotional Abuse</h4>
+          <p contenteditable="false">Prof. Dr. Anne Piezunka · Prof. Yochay Nadan · Hanin Moradi · Dr. Dana Lassri</p>
+        </div>
+      </article>
+
+      <article class="team-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="team-tag team-2">EM</div>
+        <div class="team-content">
+          <h4 contenteditable="false">Youth Perspectives on Economic Mobility</h4>
+          <p contenteditable="false">Dr. Daphna Gross-Manos · Dr. Johanna Wilmes · Dr. Hanita Kosher</p>
+        </div>
+      </article>
+
+      <article class="team-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="team-tag team-3">WB</div>
+        <div class="team-content">
+          <h4 contenteditable="false">Well-Being of Six-Year-Olds</h4>
+          <p contenteditable="false">Dr. Hanita Kosher · Dr. Johanna Wilmes</p>
+        </div>
+      </article>
+
+      <article class="team-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="team-tag team-4">CR</div>
+        <div class="team-content">
+          <h4 contenteditable="false">Cultural Sensitivity &amp; Universal Children's Rights</h4>
+          <p contenteditable="false">Prof. Yochay Nadan · Dr. Eran Melkman</p>
+        </div>
+      </article>
+
+      <article class="team-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="team-tag team-5">RC</div>
+        <div class="team-content">
+          <h4 contenteditable="false">Refugee Children</h4>
+          <p contenteditable="false">Tatjana Dietz · Mais Eissa</p>
+        </div>
+      </article>
+
+      <button class="add-team-btn" onclick="addTeam()">+ Add a research team</button>
+    </div>
+  </div>
+</section>
+
+<section class="block members-section" id="members">
+  <div class="container">
+    <div class="section-eyebrow">CCCWC Members</div>
+    <h2 class="section-title" contenteditable="false">
+      The <em>scholars and researchers</em> behind the center.
+    </h2>
+
+    <div class="members-grid" id="membersGrid">
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-andresen" onclick="openImagePicker(event, this)">
+          <img id="m-andresen-img" alt="Sabine Andresen" style="display:none">
+          <div class="photo-placeholder" id="m-andresen-placeholder">
+            <div class="init c1">SA</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Prof. Dr. Sabine Andresen</div>
+          <div class="member-role" contenteditable="false">Professor of Educational Science</div>
+          <p class="member-bio" contenteditable="false">
+            Professor at Goethe University Frankfurt with a focus on social pedagogy and family research.
+            Since 2024 she is Vice President for Career Development &amp; Advancement, Diversity and Gender Equality.
+            Her research focuses on child and family poverty, children's rights, vulnerability, historical
+            perspectives on childhood, international well-being research, and the prevention of (sexual) violence
+            against children and adolescents.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Goethe Frankfurt</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-benarieh" onclick="openImagePicker(event, this)">
+          <img id="m-benarieh-img" alt="Asher Ben-Arieh" style="display:none">
+          <div class="photo-placeholder" id="m-benarieh-placeholder">
+            <div class="init c2">AB</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Prof. Dr. Asher Ben-Arieh</div>
+          <div class="member-role" contenteditable="false">Dean, Paul Baerwald School of Social Work</div>
+          <p class="member-bio" contenteditable="false">
+            Dean of the Paul Baerwald School of Social Work and Social Welfare at the Hebrew University of Jerusalem.
+            Leading international expert on child well-being and social indicators. Served as Director and Editor of
+            the Statistical Yearbook – Children in Israel, Deputy Director General of the National Council for the Child,
+            Director of the Haruv Institute, and founding chair of the International Society for Child Indicators (ISCI).
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Hebrew University</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-dietz" onclick="openImagePicker(event, this)">
+          <img id="m-dietz-img" alt="Tatjana Dietz" style="display:none">
+          <div class="photo-placeholder" id="m-dietz-placeholder">
+            <div class="init c3">TD</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Tatjana Dietz</div>
+          <div class="member-role" contenteditable="false">Research Assistant, Educational Sciences</div>
+          <p class="member-bio" contenteditable="false">
+            Works in teaching and research at the Department of Educational Sciences at Goethe University.
+            A trained nursery school teacher who studied International Social Work (B.A.) and Educational Science (M.A.).
+            Her doctorate examined infants in educational science and the scientific knowledge production about
+            infants in the 20th century in the Western context. Interested in the prevention of child maltreatment,
+            child protection, and childhood and family research focusing on agency and vulnerability.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Goethe Frankfurt</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-grossmanos" onclick="openImagePicker(event, this)">
+          <img id="m-grossmanos-img" alt="Daphna Gross-Manos" style="display:none">
+          <div class="photo-placeholder" id="m-grossmanos-placeholder">
+            <div class="init c4">DG</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Dr. Daphna Gross-Manos</div>
+          <div class="member-role" contenteditable="false">Senior Lecturer, Social Work</div>
+          <p class="member-bio" contenteditable="false">
+            Senior Lecturer in the Social Work Department at Tel-Hai Academic College in Israel. Her research focuses
+            on child poverty and child well-being, different perspectives of child neglect, and community prevention
+            of child maltreatment. She examines the subjective well-being of vulnerable children and explores how
+            neighborhood and community contexts shape experiences of maltreatment and protection. Co-Editor in Chief
+            of the journal Child Indicators Research.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Tel-Hai College</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-huebenthal" onclick="openImagePicker(event, this)">
+          <img id="m-huebenthal-img" alt="Maksim Huebenthal" style="display:none">
+          <div class="photo-placeholder" id="m-huebenthal-placeholder">
+            <div class="init c5">MH</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Dr. Maksim Huebenthal</div>
+          <div class="member-role" contenteditable="false">Tenured Research Associate &amp; Lecturer</div>
+          <p class="member-bio" contenteditable="false">
+            Tenured research associate and lecturer in the Social Work Division of the Department of Education and
+            Psychology at Freie Universität Berlin. Involved since 2020 in the "ProChild" research consortium
+            studying support systems for mothers with borderline personality disorder. Earned his PhD on child
+            poverty in German politics at the University of Halle and previously served as Interim Professor for
+            Childhood Research at the University of Wuppertal. Researches childhood studies, poverty, child and
+            youth welfare systems, and interprofessional support for families with mentally ill parents.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">FU Berlin</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-keleynikov" onclick="openImagePicker(event, this)">
+          <img id="m-keleynikov-img" alt="Mor Keleynikov" style="display:none">
+          <div class="photo-placeholder" id="m-keleynikov-placeholder">
+            <div class="init c2">MK</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Dr. Mor Keleynikov</div>
+          <div class="member-role" contenteditable="false">Postdoctoral Fellow &amp; Adjunct Lecturer</div>
+          <p class="member-bio" contenteditable="false">
+            Postdoctoral Fellow at the Paul Baerwald School of Social Work and Social Welfare at the Hebrew
+            University of Jerusalem and an adjunct lecturer at Tel-Hai University of Kiryat Shmona in the Galilee.
+            Her research examines the mechanisms and implications of chronic and acute stress on parents, children,
+            and family dynamics. She investigates how parental emotion regulation, emotion socialization, and mental
+            health shape children's socio-emotional development under conditions of adversity. Her work explores
+            both risk and protective factors at the individual, family, and community levels, with particular
+            emphasis on understanding how families maintain resilience during periods of extreme stress.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Hebrew University</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-kosher" onclick="openImagePicker(event, this)">
+          <img id="m-kosher-img" alt="Hanita Kosher" style="display:none">
+          <div class="photo-placeholder" id="m-kosher-placeholder">
+            <div class="init c6">HK</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Dr. Hanita Kosher</div>
+          <div class="member-role" contenteditable="false">Senior Lecturer, Social Work</div>
+          <p class="member-bio" contenteditable="false">
+            Senior Lecturer at the Paul Baerwald School of Social Work and Social Welfare at the Hebrew University
+            of Jerusalem. Her research focuses on children's rights, particularly children's right to participation
+            in the child welfare system. Another strand of her work explores children's subjective well-being.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Hebrew University</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-lassri" onclick="openImagePicker(event, this)">
+          <img id="m-lassri-img" alt="Dana Lassri" style="display:none">
+          <div class="photo-placeholder" id="m-lassri-placeholder">
+            <div class="init c1">DL</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Dr. Dana Lassri</div>
+          <div class="member-role" contenteditable="false">Lecturer &amp; Director, ChARMS Research Lab</div>
+          <p class="member-bio" contenteditable="false">
+            Lecturer and director of the ChARMS (Childhood Adversities, Resilience, and Mental health under Stress)
+            Research Lab at the Paul Baerwald School of Social Work and Social Welfare at the Hebrew University of
+            Jerusalem. Research fellow at the Department of Clinical, Educational and Health Psychology at UCL and
+            a fellow at the Haruv Institute. Her research focuses on the impact of traumatic and chronic stress on
+            psychological, interpersonal, and biological development across the lifespan.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Hebrew University</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-melkman" onclick="openImagePicker(event, this)">
+          <img id="m-melkman-img" alt="Eran Melkman" style="display:none">
+          <div class="photo-placeholder" id="m-melkman-placeholder">
+            <div class="init c2">EM</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Dr. Eran Melkman</div>
+          <div class="member-role" contenteditable="false">Faculty Member, Education</div>
+          <p class="member-bio" contenteditable="false">
+            Faculty member at the Jaime and Joan Constantiner School of Education at Tel Aviv University.
+            His research focuses on child welfare, foster care, and youth aging out of care, as well as the role
+            of educators in the context of child maltreatment.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Tel Aviv University</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-nadan" onclick="openImagePicker(event, this)">
+          <img id="m-nadan-img" alt="Yochay Nadan" style="display:none">
+          <div class="photo-placeholder" id="m-nadan-placeholder">
+            <div class="init c3">YN</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Prof. Yochay Nadan</div>
+          <div class="member-role" contenteditable="false">Associate Professor &amp; Head of Master's Programs</div>
+          <p class="member-bio" contenteditable="false">
+            Associate Professor and Head of the Master's Programs at the Paul Baerwald School of Social Work and
+            Social Welfare at the Hebrew University of Jerusalem. Research focuses on child risk, maltreatment,
+            well-being, and protection in diverse contexts; psycho-social interventions, clinical training, and
+            supervision; and the LGBTQ+ community, including LGBTQ+ parenting, sexual abuse in the LGBTQ+ community,
+            and gender-diverse children and families.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Hebrew University</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-piezunka" onclick="openImagePicker(event, this)">
+          <img id="m-piezunka-img" alt="Anne Piezunka" style="display:none">
+          <div class="photo-placeholder" id="m-piezunka-placeholder">
+            <div class="init c4">AP</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Dr. Anne Piezunka</div>
+          <div class="member-role" contenteditable="false">Post-Doctoral Researcher &amp; Professor</div>
+          <p class="member-bio" contenteditable="false">
+            Post-doctoral researcher at the Institute for Special Education at Goethe University Frankfurt and
+            professor at the University of Applied Sciences for Social Work and Education (HSAP) in Berlin since 2020.
+            Researches experiences of recognition and emotional violence in educational relationships,
+            implementation of inclusive education, and assessment of discrimination in educational research.
+            Located at the interface between sociology and educational science.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Goethe / HSAP</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-tener" onclick="openImagePicker(event, this)">
+          <img id="m-tener-img" alt="Dafna Tener" style="display:none">
+          <div class="photo-placeholder" id="m-tener-placeholder">
+            <div class="init c5">DT</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Prof. Dafna Tener</div>
+          <div class="member-role" contenteditable="false">Senior Lecturer &amp; Head of BSW Program</div>
+          <p class="member-bio" contenteditable="false">
+            Senior Lecturer and Head of the BSW Program at the Paul Baerwald School of Social Work and Social
+            Welfare at the Hebrew University of Jerusalem. Her research focuses on child sexual abuse, including
+            sibling sexual abuse and preadolescent child sexual abuse. She also examines child sexual abuse within
+            specific social and cultural contexts, such as the Ultra-Orthodox community and the LGBTQ+ community.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Hebrew University</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-wanka" onclick="openImagePicker(event, this)">
+          <img id="m-wanka-img" alt="Anna Wanka" style="display:none">
+          <div class="photo-placeholder" id="m-wanka-placeholder">
+            <div class="init c6">AW</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Dr. Anna Wanka</div>
+          <div class="member-role" contenteditable="false">Research Group Leader, Sociology</div>
+          <p class="member-bio" contenteditable="false">
+            Sociologist and critical gerontologist interested in un/doing difference and the material-discursive
+            construction of age across the life course. PhD in Sociology from the University of Vienna; currently
+            a research group leader at Goethe University Frankfurt. Expertise in life course transitions,
+            intersectional inequalities, ageing and technologies, age-friendly cities, ageing migrants, and
+            lifelong learning. Works with both qualitative and quantitative methods and reflexive approaches to
+            mixed-methods research.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Goethe Frankfurt</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="member-card has-delete">
+        <button class="delete-btn" onclick="this.closest('article').remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>
+        <div class="member-photo" data-img-id="m-wilmes" onclick="openImagePicker(event, this)">
+          <img id="m-wilmes-img" alt="Johanna Wilmes" style="display:none">
+          <div class="photo-placeholder" id="m-wilmes-placeholder">
+            <div class="init c1">JW</div>
+            <div class="label">Click to add photo</div>
+          </div>
+        </div>
+        <div class="member-body">
+          <div class="member-name" contenteditable="false">Dr. Johanna Wilmes</div>
+          <div class="member-role" contenteditable="false">Research Assistant, Educational Sciences</div>
+          <p class="member-bio" contenteditable="false">
+            Research assistant in teaching and research at the Department of Educational Sciences at Goethe University.
+            Studied at Goethe University and received her doctorate in 2022 with a critical examination of the
+            well-being concept, based on a study of children in children's homes in Nepal. Has been working on the
+            international study Children's Worlds since 2012, and PI of the international project since 2023.
+            Works on issues of social inequality.
+          </p>
+          <div class="member-foot">
+            <a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>
+            <span class="member-affil">Goethe Frankfurt</span>
+          </div>
+        </div>
+      </article>
+
+      <button class="add-member-btn" onclick="addMember()">+ Add a member</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <h4>CCCWC</h4>
+      <p>The Center for Childhood and Child Welfare in Context — a planned German–Israeli initiative
+        connecting Frankfurt and Jerusalem in advancing critical childhood studies.</p>
+    </div>
+    <div>
+      <h4>Partners</h4>
+      <a href="#">Goethe University Frankfurt</a>
+      <a href="#">Hebrew University of Jerusalem</a>
+      <a href="#">Paul Baerwald School</a>
+      <a href="#">ISCIWeB</a>
+      <a href="#">Children's Worlds Study</a>
+    </div>
+    <div>
+      <h4>Sections</h4>
+      <a href="#about">About the Center</a>
+      <a href="#field">Fresh from the Field</a>
+      <a href="#objectives">Objectives</a>
+      <a href="#teams">Research Teams</a>
+      <a href="#members">Members</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 CCCWC. A planned German–Israeli initiative.</span>
+    <span>Frankfurt · Jerusalem</span>
+  </div>
+</footer>
+
+<div class="edit-banner">
+  <span>✎ Edit mode — click any text or image</span>
+  <button onclick="saveEdits()">💾 Save</button>
+  <button onclick="exportHTML()">⬇ Export HTML</button>
+  <button class="danger" onclick="toggleEdit()">Done</button>
+</div>
+
+<div class="help-tooltip" id="helpTooltip">
+  <button class="close-help" onclick="document.getElementById('helpTooltip').classList.add('dismissed')">×</button>
+  <strong>How to edit</strong>
+  <ul>
+    <li><b>Text:</b> click any text to edit it</li>
+    <li><b>Photos:</b> click a photo placeholder or logo to upload</li>
+    <li><b>Add items:</b> use the dashed "+" buttons</li>
+    <li><b>Delete:</b> hover any card, click ×</li>
+    <li><b>Save:</b> auto-saves to your browser. "Export HTML" for a permanent copy.</li>
+  </ul>
+</div>
+
+<input type="file" id="imageInput" class="file-input-hidden" accept="image/*">
+
+<!-- Email edit modal -->
+<div class="email-edit-modal" id="emailModal">
+  <div class="email-edit-card">
+    <h3>Set email address</h3>
+    <p>Enter the email address for this member.</p>
+    <input type="email" id="emailInput" placeholder="name@university.edu">
+    <div class="email-edit-actions">
+      <button class="cancel-btn" onclick="closeEmailModal()">Cancel</button>
+      <button class="save-btn" onclick="saveEmail()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Password modal -->
+<div class="email-edit-modal" id="passwordModal">
+  <div class="email-edit-card">
+    <h3>Admin access</h3>
+    <p>Enter the admin password to unlock edit mode.</p>
+    <input type="password" id="passwordInput" placeholder="Password" autocomplete="off">
+    <div id="passwordError" style="display:none;color:#dc2626;font-size:13px;margin-top:8px">Incorrect password. Try again.</div>
+    <div class="email-edit-actions">
+      <button class="cancel-btn" onclick="closePasswordModal()">Cancel</button>
+      <button class="save-btn" onclick="submitPassword()">Unlock</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  function $(id){ return document.getElementById(id); }
+  function flash(msg, isError){
+    var f = document.createElement('div');
+    f.textContent = msg;
+    f.style.cssText = 'position:fixed;top:90px;left:50%;transform:translateX(-50%);background:'+(isError?'#dc2626':'var(--teal)')+';color:#fff;padding:12px 22px;border-radius:10px;box-shadow:var(--shadow-lg);z-index:200;font-size:14px;font-weight:600';
+    document.body.appendChild(f);
+    setTimeout(function(){ f.remove(); }, 2200);
+  }
+
+  function toggleEdit(){
+    var isEdit = document.body.classList.contains('edit-mode');
+    if(!isEdit){
+      // Trying to enter edit mode — verify token with the server
+      var token = getToken();
+      if(!token){
+        showPasswordModal();
+        return;
+      }
+      // We have a token — verify it's still valid before unlocking the UI
+      api('/verify').then(function(res){
+        if(res && res.ok){
+          setEditMode(true);
+        } else {
+          setToken('');
+          showPasswordModal();
+        }
+      }).catch(function(){
+        setToken('');
+        showPasswordModal();
+      });
+      return;
+    }
+    setEditMode(false);
+  }
+  window.toggleEdit = toggleEdit;
+
+  function setEditMode(isEdit){
+    document.body.classList.toggle('edit-mode', isEdit);
+    var btn = $('editToggle');
+    btn.classList.toggle('active', isEdit);
+    $('editIcon').textContent = isEdit ? '✓' : '✎';
+    $('editLabel').textContent = isEdit ? 'Done' : 'Edit';
+    document.querySelectorAll('[contenteditable]').forEach(function(el){
+      el.setAttribute('contenteditable', isEdit ? 'true' : 'false');
+    });
+  }
+
+  function showPasswordModal(){
+    $('passwordModal').classList.add('show');
+    var input = $('passwordInput');
+    input.value = '';
+    $('passwordError').style.display = 'none';
+    setTimeout(function(){ input.focus(); }, 50);
+  }
+  function closePasswordModal(){
+    $('passwordModal').classList.remove('show');
+  }
+  window.closePasswordModal = closePasswordModal;
+
+  function submitPassword(){
+    var entered = $('passwordInput').value;
+    if(!entered){
+      $('passwordError').textContent = 'Please enter the password.';
+      $('passwordError').style.display = 'block';
+      return;
+    }
+    // Disable inputs while we wait for the server
+    var saveBtn = document.querySelector('#passwordModal .save-btn');
+    if(saveBtn){ saveBtn.disabled = true; saveBtn.textContent = 'Checking...'; }
+
+    fetch(API_BASE + '/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: entered })
+    }).then(function(res){
+      return res.json().then(function(data){ return { ok: res.ok, data: data }; });
+    }).then(function(result){
+      if(saveBtn){ saveBtn.disabled = false; saveBtn.textContent = 'Unlock'; }
+      if(result.ok && result.data.token){
+        setToken(result.data.token);
+        closePasswordModal();
+        setEditMode(true);
+        flash('Edit mode unlocked ✓');
+      } else {
+        $('passwordError').textContent = (result.data && result.data.error) || 'Incorrect password. Try again.';
+        $('passwordError').style.display = 'block';
+        $('passwordInput').focus();
+        $('passwordInput').select();
+      }
+    }).catch(function(err){
+      if(saveBtn){ saveBtn.disabled = false; saveBtn.textContent = 'Unlock'; }
+      $('passwordError').textContent = 'Network error: ' + err.message;
+      $('passwordError').style.display = 'block';
+    });
+  }
+  window.submitPassword = submitPassword;
+
+  var currentImageTarget = null;
+  function openImagePicker(event, container){
+    if(!document.body.classList.contains('edit-mode')) return;
+    event.stopPropagation();
+    currentImageTarget = container;
+    $('imageInput').click();
+  }
+  window.openImagePicker = openImagePicker;
+
+  var currentEmailLink = null;
+  function editEmail(event, link){
+    if(!document.body.classList.contains('edit-mode')){
+      if(!link.getAttribute('href') || link.getAttribute('href') === 'mailto:'){
+        event.preventDefault();
+      }
+      return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    currentEmailLink = link;
+    var current = link.getAttribute('href') || '';
+    var email = current.replace(/^mailto:/, '');
+    $('emailInput').value = email;
+    $('emailModal').classList.add('show');
+    setTimeout(function(){ $('emailInput').focus(); }, 50);
+  }
+  window.editEmail = editEmail;
+
+  function closeEmailModal(){
+    $('emailModal').classList.remove('show');
+    currentEmailLink = null;
+  }
+  window.closeEmailModal = closeEmailModal;
+
+  function saveEmail(){
+    if(!currentEmailLink) return;
+    var email = $('emailInput').value.trim();
+    if(email){
+      currentEmailLink.setAttribute('href', 'mailto:' + email);
+      currentEmailLink.textContent = '✉ ' + email;
+      currentEmailLink.title = email;
+    } else {
+      currentEmailLink.setAttribute('href', 'mailto:');
+      currentEmailLink.textContent = '✉ Email';
+      currentEmailLink.title = '';
+    }
+    closeEmailModal();
+    flash('Email updated ✓');
+  }
+  window.saveEmail = saveEmail;
+
+  // ===== Auth & API client =====
+  var TOKEN_KEY = 'cccwc-auth-token';
+  var API_BASE = '/api/data';
+
+  function getToken(){
+    try { return localStorage.getItem(TOKEN_KEY) || ''; } catch(e) { return ''; }
+  }
+  function setToken(t){
+    try {
+      if(t) localStorage.setItem(TOKEN_KEY, t);
+      else localStorage.removeItem(TOKEN_KEY);
+    } catch(e){}
+  }
+
+  function api(path, options){
+    options = options || {};
+    var headers = options.headers || {};
+    headers['Content-Type'] = 'application/json';
+    var token = getToken();
+    if(token) headers['Authorization'] = 'Bearer ' + token;
+    return fetch(API_BASE + path, {
+      method: options.method || 'GET',
+      headers: headers,
+      body: options.body ? JSON.stringify(options.body) : undefined
+    }).then(function(res){
+      if(res.status === 401){
+        // Token expired or never authenticated
+        setToken('');
+        var err = new Error('Unauthorized');
+        err.status = 401;
+        throw err;
+      }
+      return res.json().then(function(data){
+        if(!res.ok){
+          var err = new Error(data.error || ('HTTP ' + res.status));
+          err.status = res.status;
+          throw err;
+        }
+        return data;
+      });
+    });
+  }
+
+  // Compress an image dataURL down to a sane size before storing.
+  function compressImage(dataUrl, maxWidth, quality){
+    maxWidth = maxWidth || 900;
+    quality = quality || 0.85;
+    return new Promise(function(resolve, reject){
+      var img = new Image();
+      img.onload = function(){
+        var w = img.naturalWidth, h = img.naturalHeight;
+        if(w > maxWidth){
+          h = Math.round(h * (maxWidth / w));
+          w = maxWidth;
+        }
+        var canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+        try{
+          var isLogoLike = /^data:image\/(png|svg)/.test(dataUrl) && img.naturalWidth < 600;
+          var out = isLogoLike
+            ? canvas.toDataURL('image/png')
+            : canvas.toDataURL('image/jpeg', quality);
+          resolve(out);
+        }catch(e){ reject(e); }
+      };
+      img.onerror = function(){ reject(new Error('Image load failed')); };
+      img.src = dataUrl;
+    });
+  }
+
+  // Save an image to the backend (called by the upload handler in init())
+  function saveImageData(id, dataUrl){
+    return api('/image', { method: 'POST', body: { id: id, dataUrl: dataUrl } })
+      .then(function(){ return true; })
+      .catch(function(err){
+        if(err.status === 401){
+          flash('Session expired \u2014 click Edit again to log in', true);
+        } else {
+          flash('Could not upload image: ' + err.message, true);
+        }
+        return false;
+      });
+  }
+
+  // Load all images from the backend and render them
+  function loadImages(){
+    return api('/images').then(function(data){
+      (data.keys || []).forEach(function(id){
+        var img = $(id + '-img');
+        var ph = $(id + '-placeholder');
+        if(img){
+          // Add a cache-buster so updated images show up fresh
+          img.src = API_BASE + '/image/' + encodeURIComponent(id) + '?t=' + Date.now();
+          img.style.display = 'block';
+        }
+        if(ph){ ph.style.display = 'none'; }
+      });
+    }).catch(function(){ /* network error — leave placeholders showing */ });
+  }
+
+  // Save all editable section HTML to the backend
+  function saveEdits(silent){
+    var sections = {};
+    ['about','field','objectives','teams','members'].forEach(function(id){
+      var el = $(id);
+      if(el) sections[id] = el.innerHTML;
+    });
+    var heroEl = document.querySelector('.hero-inner');
+    if(heroEl) sections['hero'] = heroEl.innerHTML;
+
+    return api('/content', { method: 'POST', body: sections })
+      .then(function(){ if(!silent) flash('Saved \u2713'); })
+      .catch(function(err){
+        if(err.status === 401){
+          flash('Session expired \u2014 please log in again', true);
+        } else {
+          flash('Could not save: ' + err.message, true);
+        }
+      });
+  }
+  window.saveEdits = saveEdits;
+
+  // Load saved content from the backend (visible to all visitors)
+  function loadFromStorage(){
+    return api('/content').then(function(sections){
+      if(!sections || Object.keys(sections).length === 0) return;
+      Object.keys(sections).forEach(function(id){
+        if(id === 'hero'){
+          var el = document.querySelector('.hero-inner');
+          if(el) el.innerHTML = sections[id];
+        } else {
+          var el = $(id);
+          if(el) el.innerHTML = sections[id];
+        }
+      });
+      var isEdit = document.body.classList.contains('edit-mode');
+      document.querySelectorAll('[contenteditable]').forEach(function(el){
+        el.setAttribute('contenteditable', isEdit ? 'true' : 'false');
+      });
+      // Re-bind blur handlers since innerHTML replaced the elements
+      document.querySelectorAll('#membersGrid .member-card').forEach(function(card){
+        var nameEl = card.querySelector('.member-name');
+        if(nameEl){
+          nameEl.addEventListener('blur', function(){
+            sortMembersAlphabetically();
+            scheduleAutosave();
+          });
+        }
+        var emailLink = card.querySelector('.member-email');
+        if(emailLink && !emailLink.getAttribute('data-wired')){
+          emailLink.setAttribute('data-wired', '1');
+        }
+      });
+    }).catch(function(){ /* first load, no content yet — that's fine */ });
+  }
+
+  function exportHTML(){
+    var wasEdit = document.body.classList.contains('edit-mode');
+    if(wasEdit) document.body.classList.remove('edit-mode');
+    document.querySelectorAll('[contenteditable]').forEach(function(el){
+      el.setAttribute('contenteditable','false');
+    });
+    var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    if(wasEdit){
+      document.body.classList.add('edit-mode');
+      document.querySelectorAll('[contenteditable]').forEach(function(el){
+        el.setAttribute('contenteditable','true');
+      });
+    }
+    var blob = new Blob([html], {type:'text/html'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'CCCWC.html'; a.click();
+    URL.revokeObjectURL(url);
+    flash('HTML downloaded ✓');
+  }
+  window.exportHTML = exportHTML;
+
+  function sortMembersAlphabetically(){
+    var grid = $('membersGrid');
+    if(!grid) return;
+    var btn = grid.querySelector('.add-member-btn');
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.member-card'));
+    cards.sort(function(a, b){
+      var nameA = ((a.querySelector('.member-name') || {}).textContent || '').trim();
+      var nameB = ((b.querySelector('.member-name') || {}).textContent || '').trim();
+      var partsA = nameA.split(/\s+/);
+      var partsB = nameB.split(/\s+/);
+      var lastA = (partsA[partsA.length-1] || '').toLowerCase();
+      var lastB = (partsB[partsB.length-1] || '').toLowerCase();
+      return lastA.localeCompare(lastB);
+    });
+    cards.forEach(function(card){ grid.insertBefore(card, btn); });
+  }
+  window.sortMembersAlphabetically = sortMembersAlphabetically;
+
+  var colors = ['c1','c2','c3','c4','c5','c6'];
+  var teamColors = ['team-1','team-2','team-3','team-4','team-5'];
+
+  function getInitials(name){
+    var titleRe = /^(Prof\.|Dr\.|Dr|Prof|Mr\.|Ms\.|Mrs\.)$/i;
+    var words = name.trim().split(/\s+/).filter(function(w){
+      return w && !titleRe.test(w);
+    });
+    var first = (words[0] && words[0][0]) || '?';
+    var last  = (words[words.length-1] && words[words.length-1][0]) || '';
+    return (first + last).toUpperCase();
+  }
+
+  function addMember(){
+    var grid = $('membersGrid');
+    if(!grid){ flash('Members grid not found', true); return; }
+    var btn = grid.querySelector('.add-member-btn');
+    var idx = grid.querySelectorAll('.member-card').length;
+    var uniqueId = 'm-new-' + Date.now();
+    var card = document.createElement('article');
+    card.className = 'member-card has-delete';
+    card.innerHTML =
+      '<button class="delete-btn" onclick="this.closest(&quot;article&quot;).remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>'
+      + '<div class="member-photo" data-img-id="' + uniqueId + '" onclick="openImagePicker(event, this)">'
+      +   '<img id="' + uniqueId + '-img" alt="" style="display:none">'
+      +   '<div class="photo-placeholder" id="' + uniqueId + '-placeholder">'
+      +     '<div class="init ' + colors[idx%6] + '">??</div>'
+      +     '<div class="label">Click to add photo</div>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="member-body">'
+      +   '<div class="member-name" contenteditable="true">New Member</div>'
+      +   '<div class="member-role" contenteditable="true">Role / Title</div>'
+      +   '<p class="member-bio" contenteditable="true">Add bio here.</p>'
+      +   '<div class="member-foot">'
+      +     '<a href="mailto:" class="member-email" onclick="editEmail(event, this)">✉ Email</a>'
+      +     '<span class="member-affil" contenteditable="true">Affiliation</span>'
+      +   '</div>'
+      + '</div>';
+
+    grid.insertBefore(card, btn);
+
+    var nameEl = card.querySelector('.member-name');
+    var initEl = card.querySelector('.init');
+
+    nameEl.addEventListener('input', function(){
+      var name = this.textContent || '';
+      if(initEl) initEl.textContent = getInitials(name);
+    });
+
+    nameEl.addEventListener('blur', function(){
+      sortMembersAlphabetically();
+      scheduleAutosave();
+    });
+
+    setTimeout(function(){
+      try {
+        nameEl.focus();
+        var range = document.createRange();
+        range.selectNodeContents(nameEl);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } catch(e){}
+    }, 50);
+
+    flash('Member added — type the name');
+  }
+  window.addMember = addMember;
+
+  function addTeam(){
+    var grid = $('teamsGrid');
+    if(!grid) return;
+    var btn = grid.querySelector('.add-team-btn');
+    var idx = grid.querySelectorAll('.team-card').length;
+    var card = document.createElement('article');
+    card.className = 'team-card has-delete';
+    card.innerHTML =
+      '<button class="delete-btn" onclick="this.closest(&quot;article&quot;).remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>'
+      + '<div class="team-tag ' + teamColors[idx%5] + '" contenteditable="true">??</div>'
+      + '<div class="team-content">'
+      +   '<h4 contenteditable="true">New Research Team</h4>'
+      +   '<p contenteditable="true">Add team members here</p>'
+      + '</div>';
+    grid.insertBefore(card, btn);
+    var h4 = card.querySelector('h4');
+    if(h4) h4.focus();
+  }
+  window.addTeam = addTeam;
+
+  function addObjective(){
+    var grid = $('objGrid');
+    if(!grid) return;
+    var btn = grid.querySelector('.add-obj-btn');
+    var card = document.createElement('article');
+    card.className = 'obj-card has-delete';
+    card.innerHTML =
+      '<button class="delete-btn" onclick="this.closest(&quot;article&quot;).remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>'
+      + '<div class="obj-icon teal">◆</div>'
+      + '<h3 contenteditable="true">New Objective</h3>'
+      + '<ul>'
+      +   '<li contenteditable="true">First goal</li>'
+      +   '<li contenteditable="true">Second goal</li>'
+      + '</ul>';
+    grid.insertBefore(card, btn);
+    var h3 = card.querySelector('h3');
+    if(h3) h3.focus();
+  }
+  window.addObjective = addObjective;
+
+  function addFieldCard(){
+    var grid = $('fieldGrid');
+    if(!grid) return;
+    var btn = grid.querySelector('.add-member-btn');
+    var card = document.createElement('article');
+    card.className = 'field-card has-delete';
+    card.innerHTML =
+      '<button class="delete-btn" onclick="this.closest(&quot;article&quot;).remove(); window.scheduleAutosave && window.scheduleAutosave();" title="Delete">×</button>'
+      + '<div class="field-thumb field-thumb-1">'
+      +   '<div>'
+      +     '<h4 contenteditable="true">Publication title</h4>'
+      +     '<p contenteditable="true">Subtitle or description</p>'
+      +   '</div>'
+      + '</div>'
+      + '<div class="field-meta">'
+      +   '<span class="field-tag" contenteditable="true">Type</span>'
+      +   '<div class="field-title" contenteditable="true">Brief description</div>'
+      +   '<div class="field-date" contenteditable="true">Date</div>'
+      + '</div>';
+    grid.insertBefore(card, btn);
+    var h4 = card.querySelector('h4');
+    if(h4) h4.focus();
+  }
+  window.addFieldCard = addFieldCard;
+
+  // ===== Autosave (debounced) =====
+  var autosaveTimer = null;
+  function scheduleAutosave(){
+    if(!document.body.classList.contains('edit-mode')) return;
+    if(autosaveTimer) clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(function(){
+      saveEdits(true); // silent
+    }, 2000);
+  }
+  window.scheduleAutosave = scheduleAutosave;
+
+  function init(){
+    var imageInput = $('imageInput');
+    if(imageInput){
+      imageInput.addEventListener('change', function(e){
+        var file = e.target.files[0];
+        if(!file || !currentImageTarget) return;
+        var target = currentImageTarget;
+        var reader = new FileReader();
+        reader.onload = function(ev){
+          var rawDataUrl = ev.target.result;
+          var imgId = target.dataset.imgId;
+          var img = $(imgId + '-img');
+          var ph = $(imgId + '-placeholder');
+
+          if(img){ img.src = rawDataUrl; img.style.display = 'block'; }
+          if(ph){ ph.style.display = 'none'; }
+
+          var isLogo = imgId && imgId.indexOf('logo-') === 0;
+          var isHero = imgId === 'hero-cover';
+          var maxW = isLogo ? 400 : (isHero ? 1200 : 700);
+          var quality = isLogo ? 0.92 : 0.85;
+
+          flash('Uploading...');
+          compressImage(rawDataUrl, maxW, quality).then(function(compressed){
+            if(img) img.src = compressed;
+            return saveImageData(imgId, compressed).then(function(ok){
+              if(ok){
+                var origKB = Math.round(rawDataUrl.length * 0.75 / 1024);
+                var newKB  = Math.round(compressed.length * 0.75 / 1024);
+                flash('Image uploaded \u2713 (' + origKB + 'KB \u2192 ' + newKB + 'KB)');
+              }
+            });
+          }).catch(function(err){
+            // Try saving uncompressed as fallback
+            saveImageData(imgId, rawDataUrl).then(function(ok){
+              if(ok) flash('Image uploaded \u2713');
+            });
+          });
+        };
+        reader.readAsDataURL(file);
+        e.target.value = '';
+      });
+    }
+
+    var emailInput = $('emailInput');
+    if(emailInput){
+      emailInput.addEventListener('keydown', function(e){
+        if(e.key === 'Enter'){ e.preventDefault(); saveEmail(); }
+        if(e.key === 'Escape'){ e.preventDefault(); closeEmailModal(); }
+      });
+    }
+    var emailModal = $('emailModal');
+    if(emailModal){
+      emailModal.addEventListener('click', function(e){
+        if(e.target === this) closeEmailModal();
+      });
+    }
+
+    var passwordInput = $('passwordInput');
+    if(passwordInput){
+      passwordInput.addEventListener('keydown', function(e){
+        if(e.key === 'Enter'){ e.preventDefault(); submitPassword(); }
+        if(e.key === 'Escape'){ e.preventDefault(); closePasswordModal(); }
+      });
+    }
+    var passwordModal = $('passwordModal');
+    if(passwordModal){
+      passwordModal.addEventListener('click', function(e){
+        if(e.target === this) closePasswordModal();
+      });
+    }
+
+    // Listen for any text edit anywhere on the page → autosave
+    document.body.addEventListener('input', function(e){
+      var el = e.target;
+      if(el && el.getAttribute && el.getAttribute('contenteditable') === 'true'){
+        scheduleAutosave();
+      }
+    });
+
+    // Load content first, THEN images (so image elements exist)
+    loadFromStorage().then(function(){
+      loadImages();
+
+      // Re-bind blur sort/autosave for member cards (also done inside loadFromStorage,
+      // but call once more for the fresh DOM in case nothing was loaded from API)
+      document.querySelectorAll('#membersGrid .member-card').forEach(function(card){
+        var nameEl = card.querySelector('.member-name');
+        if(nameEl && !nameEl.getAttribute('data-blur-wired')){
+          nameEl.setAttribute('data-blur-wired', '1');
+          nameEl.addEventListener('blur', function(){
+            sortMembersAlphabetically();
+            scheduleAutosave();
+          });
+        }
+      });
+
+      sortMembersAlphabetically();
+    });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>
